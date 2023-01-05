@@ -10,14 +10,16 @@
         android:id="@+id/materialButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1"
+        android:text="Пользовательский интерфейс"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/ButtonStyle"/>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+        android:text="Административный интерфейс"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton"
+        style="@style/ButtonStyle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
