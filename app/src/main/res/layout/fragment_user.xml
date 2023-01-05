@@ -11,21 +11,64 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/view_drink_list"
+            android:id="@+id/recycler_view_drinkList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_view_totalSum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="asdasd"
-            android:id="@+id/totalSum"
+            android:text="50"
             style="@style/TextViewStyle"
             android:background="@drawable/text_view_background"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/view_drink_list" />
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_drinkList"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_coinList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_totalSum" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewStyle"
+            android:text="1. Внесите деньги"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_coinList"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_view_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewStyle"
+            android:text="2. Выберите напиток"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@id/text_view_1"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_view_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewStyle"
+            android:text="3. Получите сдачу"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@id/text_view_2"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_cash_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ButtonStyle"
+            android:text="Сдача"
+            app:layout_constraintTop_toBottomOf="@id/text_view_3"
+            android:layout_marginTop="10dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
