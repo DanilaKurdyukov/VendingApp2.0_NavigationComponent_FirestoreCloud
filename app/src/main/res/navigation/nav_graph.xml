@@ -9,5 +9,14 @@
         android:id="@+id/startFragment"
         android:name="com.example.vendingapp20.fragments.StartFragment"
         android:label="Выберите действие"
-        tools:layout="@layout/fragment_start" />
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.vendingapp20.fragments.UserFragment"
+        android:label="Автомат напитков"
+        tools:layout="@layout/fragment_user" />
 </navigation>

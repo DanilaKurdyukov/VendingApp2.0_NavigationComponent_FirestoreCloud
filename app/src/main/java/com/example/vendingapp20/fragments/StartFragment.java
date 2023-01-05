@@ -3,6 +3,8 @@ package com.example.vendingapp20.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +51,16 @@ public class StartFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_start, container, false);
 
+        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
 
+        NavController navController = navHostFragment.getNavController();
+
+        rootView.findViewById(R.id.button_userInterface).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.userFragment);
+            }
+        });
 
         return rootView;
     }

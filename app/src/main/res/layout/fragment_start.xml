@@ -7,7 +7,7 @@
     tools:context=".fragments.StartFragment">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/button_userInterface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Пользовательский интерфейс"
@@ -16,10 +16,11 @@
         style="@style/ButtonStyle"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_administrativeInterface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Административный интерфейс"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton"
+        app:layout_constraintTop_toBottomOf="@+id/button_userInterface"
         style="@style/ButtonStyle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
