@@ -16,14 +16,14 @@
             android:id="@+id/drink_image"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/drink_name"
+            android:id="@+id/text_view_drink_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextViewStyle"
             />
-        
+
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/drink_cost"
+            android:id="@+id/text_view_drink_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextViewStyle"/>
