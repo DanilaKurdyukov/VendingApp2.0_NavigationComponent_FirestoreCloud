@@ -3,16 +3,14 @@ package com.example.vendingapp20.models;
 public class VendingMachineDrink {
 
         private int id;
-        private int machineId;
         private int drinkId;
         private int count;
         private String drinkName;
         private int drinkCost;
         private String drinkImage;
 
-        public VendingMachineDrink(int id, int machineId, int drinkId, int count, String drinkName, int drinkCost) {
+        public VendingMachineDrink(int id, int drinkId, int count, String drinkName, int drinkCost) {
                 this.id = id;
-                this.machineId = machineId;
                 this.drinkId = drinkId;
                 this.count = count;
                 this.drinkName = drinkName;
@@ -25,14 +23,6 @@ public class VendingMachineDrink {
 
         public void setId(int id) {
                 this.id = id;
-        }
-
-        public int getMachineId() {
-                return machineId;
-        }
-
-        public void setMachineId(int machineId) {
-                this.machineId = machineId;
         }
 
         public int getDrinkId() {
