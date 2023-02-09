@@ -1,6 +1,8 @@
 package com.example.vendingapp20.models;
 
-public class VendingMachineDrink {
+import java.io.Serializable;
+
+public class VendingMachineDrink implements Serializable {
 
         private int id;
         private int drinkId;
@@ -8,6 +10,11 @@ public class VendingMachineDrink {
         private String drinkName;
         private int drinkCost;
         private String drinkImage;
+
+        public VendingMachineDrink() {
+                // empty constructor
+                // required for Firebase.
+        }
 
         public VendingMachineDrink(int id, int drinkId, int count, String drinkName, int drinkCost) {
                 this.id = id;
