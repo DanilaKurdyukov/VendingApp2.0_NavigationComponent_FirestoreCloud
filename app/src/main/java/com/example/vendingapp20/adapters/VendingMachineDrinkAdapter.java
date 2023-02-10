@@ -1,6 +1,7 @@
 package com.example.vendingapp20.adapters;
 
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,17 @@ import java.util.List;
 
 public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMachineDrinkAdapter.ViewHolder>{
 
+    public interface ItemClickListener{
+        void onClick(VendingMachineDrink vendingMachineDrink);
+    }
+
+    private ItemClickListener itemClickListener;
+
     private Context mContext;
     private List<VendingMachineDrink> drinks;
+
+    private SparseBooleanArray selectedItems = new SparseBooleanArray();
+    int position;
 
     public VendingMachineDrinkAdapter(Context mContext, List<VendingMachineDrink> drinks) {
         this.mContext = mContext;
@@ -41,11 +51,33 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
         if (current.getDrinkImage()!=null){
             Picasso.get().load(current.getDrinkImage()).into(holder.drinkImage);
         }
+        if (itemClickListener !=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (selectedItems!=null){
+                        if (selectedItems.get(position,false)){
+                            selectedItems.delete(position);
+                            v.setSelected(false);
+                        }
+                        else{
+                            selectedItems.put(position, true);
+                            v.setSelected(true);
+                        }
+                    }
+                    itemClickListener.onClick(current);
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
         return drinks.size();
+    }
+
+    public void setOnItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {

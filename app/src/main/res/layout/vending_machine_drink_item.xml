@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/darkGreen"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
     app:strokeColor="@color/black"
+    android:clickable="true"
     app:strokeWidth="3dp">
 
 
@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@drawable/drink_item_background">
 
         <ImageView
             android:layout_width="100dp"

@@ -80,6 +80,12 @@ public class UserFragment extends Fragment {
         drinkRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
         drinks = new ArrayList<>();
         drinkAdapter = new VendingMachineDrinkAdapter(getContext(), drinks);
+        drinkAdapter.setOnItemClickListener(new VendingMachineDrinkAdapter.ItemClickListener() {
+            @Override
+            public void onClick(VendingMachineDrink vendingMachineDrink) {
+
+            }
+        });
         drinkRecycler.setAdapter(drinkAdapter);
         getDrinks();
 
@@ -98,17 +104,17 @@ public class UserFragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                drinkAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                drinkAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                drinkAdapter.notifyDataSetChanged();
             }
 
             @Override
