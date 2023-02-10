@@ -1,14 +1,19 @@
 package com.example.vendingapp20.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
-public class VendingMachineDrink implements Serializable {
+public class VendingMachineDrink implements Parcelable {
 
-        private int id;
-        private int drinkId;
         private int count;
-        private String drinkName;
         private int drinkCost;
+        private String drinkName;
+        private int id;
+
+
+
         private String drinkImage;
 
         public VendingMachineDrink() {
@@ -16,12 +21,32 @@ public class VendingMachineDrink implements Serializable {
                 // required for Firebase.
         }
 
-        public VendingMachineDrink(int id, int drinkId, int count, String drinkName, int drinkCost) {
-                this.id = id;
-                this.drinkId = drinkId;
-                this.count = count;
-                this.drinkName = drinkName;
-                this.drinkCost = drinkCost;
+        protected VendingMachineDrink(Parcel in) {
+                id = in.readInt();
+                count = in.readInt();
+                drinkName = in.readString();
+                drinkCost = in.readInt();
+                drinkImage = in.readString();
+        }
+
+        public static final Creator<VendingMachineDrink> CREATOR = new Creator<VendingMachineDrink>() {
+                @Override
+                public VendingMachineDrink createFromParcel(Parcel in) {
+                        return new VendingMachineDrink(in);
+                }
+
+                @Override
+                public VendingMachineDrink[] newArray(int size) {
+                        return new VendingMachineDrink[size];
+                }
+        };
+
+        public String getDrinkImage() {
+                return drinkImage;
+        }
+
+        public void setDrinkImage(String drinkImage) {
+                this.drinkImage = drinkImage;
         }
 
         public int getId() {
@@ -32,13 +57,6 @@ public class VendingMachineDrink implements Serializable {
                 this.id = id;
         }
 
-        public int getDrinkId() {
-                return drinkId;
-        }
-
-        public void setDrinkId(int drinkId) {
-                this.drinkId = drinkId;
-        }
 
         public int getCount() {
                 return count;
@@ -62,5 +80,19 @@ public class VendingMachineDrink implements Serializable {
 
         public void setDrinkCost(int drinkCost) {
                 this.drinkCost = drinkCost;
+        }
+
+        @Override
+        public int describeContents() {
+                return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+                dest.writeInt(id);
+                dest.writeInt(count);
+                dest.writeString(drinkName);
+                dest.writeInt(drinkCost);
+                dest.writeString(drinkImage);
         }
 }

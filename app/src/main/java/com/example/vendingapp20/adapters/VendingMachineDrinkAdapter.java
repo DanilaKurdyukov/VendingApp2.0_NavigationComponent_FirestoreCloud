@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vendingapp20.R;
 import com.example.vendingapp20.models.VendingMachineDrink;
 import com.google.android.material.textview.MaterialTextView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,7 +38,9 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
         VendingMachineDrink current = drinks.get(position);
         holder.txtDrinkCost.setText(String.valueOf(current.getDrinkCost()));
         holder.txtDrinkName.setText(current.getDrinkName());
-
+        if (current.getDrinkImage()!=null){
+            Picasso.get().load(current.getDrinkImage()).into(holder.drinkImage);
+        }
     }
 
     @Override
@@ -47,11 +51,13 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
         private MaterialTextView txtDrinkName, txtDrinkCost;
+        private ImageView drinkImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDrinkName = itemView.findViewById(R.id.text_view_drink_name);
             txtDrinkCost = itemView.findViewById(R.id.text_view_drink_cost);
+            drinkImage = itemView.findViewById(R.id.drink_image);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.vendingapp20.fragments;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +16,12 @@ import android.widget.Toast;
 import com.example.vendingapp20.R;
 import com.example.vendingapp20.adapters.VendingMachineDrinkAdapter;
 import com.example.vendingapp20.models.VendingMachineDrink;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,10 +60,13 @@ public class UserFragment extends Fragment {
         }
     }
 
+    private FirebaseDatabase db;
+    private DatabaseReference dbRef;
+
+
     private RecyclerView drinkRecycler;
     private List<VendingMachineDrink> drinks;
     private VendingMachineDrinkAdapter drinkAdapter;
-    private FirebaseFirestore db;
 
 
     @Override
@@ -69,8 +74,9 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_user, container, false);
 
+        db = FirebaseDatabase.getInstance();
+        dbRef = db.getReference("Drinks");
         drinkRecycler = rootView.findViewById(R.id.recycler_view_drinkList);
-        db = FirebaseFirestore.getInstance();
         drinkRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
         drinks = new ArrayList<>();
         drinkAdapter = new VendingMachineDrinkAdapter(getContext(), drinks);
@@ -82,27 +88,33 @@ public class UserFragment extends Fragment {
     }
 
     private void getDrinks(){
-        db.collection("VendingMachineDrink").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()){
-                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                            for(DocumentSnapshot d : list){
-                                VendingMachineDrink drink = d.toObject(VendingMachineDrink.class);
-                                drinks.add(drink);
-                            }
-                            drinkAdapter.notifyDataSetChanged();
-                        }
-                        else{
-                            Toast.makeText(getContext(),"Данные не найдены!",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
+        drinks.clear();
+        dbRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                drinks.add(snapshot.getValue(VendingMachineDrink.class));
+                drinkAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

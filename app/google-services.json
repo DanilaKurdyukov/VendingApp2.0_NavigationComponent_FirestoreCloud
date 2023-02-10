@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "78299054740",
-    "project_id": "vendingdb-8754b",
-    "storage_bucket": "vendingdb-8754b.appspot.com"
+    "project_number": "793958953217",
+    "firebase_url": "https://vendingdb-e58e6-default-rtdb.firebaseio.com",
+    "project_id": "vendingdb-e58e6",
+    "storage_bucket": "vendingdb-e58e6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:78299054740:android:593794d70fea22bdea6a81",
+        "mobilesdk_app_id": "1:793958953217:android:fafc2fd5e197bafdc82b00",
         "android_client_info": {
           "package_name": "com.example.vendingapp20"
         }
       },
       "oauth_client": [
         {
-          "client_id": "78299054740-fg443ju1bvh8oj21uvaor4ri8b7at773.apps.googleusercontent.com",
+          "client_id": "793958953217-1j0ddlt1llsm8j1g6v7ea9m97536401v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAaB3ca7hxjp235ffoTBswQ9u69KJcaCh4"
+          "current_key": "AIzaSyADzzqP2aPmL7a_ZGloS510Qiea1FKROJg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "78299054740-fg443ju1bvh8oj21uvaor4ri8b7at773.apps.googleusercontent.com",
+              "client_id": "793958953217-1j0ddlt1llsm8j1g6v7ea9m97536401v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
