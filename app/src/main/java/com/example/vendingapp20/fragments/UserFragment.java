@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.vendingapp20.R;
+import com.example.vendingapp20.adapters.VendingCoinAdapter;
 import com.example.vendingapp20.adapters.VendingMachineDrinkAdapter;
+import com.example.vendingapp20.models.VendingMachineCoin;
 import com.example.vendingapp20.models.VendingMachineDrink;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.database.ChildEventListener;
@@ -65,7 +67,11 @@ public class UserFragment extends Fragment {
     private DatabaseReference dbRef;
 
 
-    private RecyclerView drinkRecycler;
+    private RecyclerView drinkRecycler,coinRecycler;
+
+    private List<VendingMachineCoin> coins;
+
+    private VendingCoinAdapter coinAdapter;
     private List<VendingMachineDrink> drinks;
     private VendingMachineDrinkAdapter drinkAdapter;
 
@@ -86,16 +92,30 @@ public class UserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         init(view);
         getDrinks();
+        getCoins();
     }
 
     private void init(View rootView){
         db = FirebaseDatabase.getInstance();
-        dbRef = db.getReference("Drinks");
+
+        txtTotalSum = rootView.findViewById(R.id.text_view_totalSum);
+
+        coinRecycler = rootView.findViewById(R.id.recycler_view_coinList);
+        coinRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
+        coins = new ArrayList<>();
+        coinAdapter = new VendingCoinAdapter(getContext(),coins);
+        coinAdapter.setItemClickListener(new VendingCoinAdapter.ItemClickListener() {
+            @Override
+            public void onClick(VendingMachineCoin vendingMachineCoin) {
+
+            }
+        });
+        coinRecycler.setAdapter(coinAdapter);
+
         drinkRecycler = rootView.findViewById(R.id.recycler_view_drinkList);
         drinkRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
         drinks = new ArrayList<>();
         drinkAdapter = new VendingMachineDrinkAdapter(getContext(), drinks);
-        txtTotalSum = rootView.findViewById(R.id.text_view_totalSum);
         drinkAdapter.setOnItemClickListener(new VendingMachineDrinkAdapter.ItemClickListener() {
             @Override
             public void onClick(VendingMachineDrink vendingMachineDrink) {
@@ -105,8 +125,41 @@ public class UserFragment extends Fragment {
         drinkRecycler.setAdapter(drinkAdapter);
     }
 
+    private void getCoins(){
+        coins.clear();
+        dbRef = db.getReference("Coins");
+        dbRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                coins.add(snapshot.getValue(VendingMachineCoin.class));
+                coinAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                coinAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                coinAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                coinAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void getDrinks(){
         drinks.clear();
+        dbRef = db.getReference("Drinks");
         dbRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
