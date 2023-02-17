@@ -9,6 +9,11 @@ public class VendingMachineCoin {
     private boolean isActive;
     private int coinValue;
 
+    public VendingMachineCoin() {
+        // empty constructor
+        // required for Firebase.
+    }
+
     public VendingMachineCoin(int id, int machineId, int coinId, int count, boolean isActive, int coinValue) {
         this.id = id;
         this.machineId = machineId;
