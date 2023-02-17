@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    app:strokeColor="@color/black"
+    android:clickable="true"
+    app:strokeWidth="3dp">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@drawable/item_background">
+
+       <com.google.android.material.textview.MaterialTextView
+           android:id="@+id/text_view_coin_name"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           style="@style/TextViewStyle"
+           android:textColor="@color/brown"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+           android:textSize="30dp"
+           android:text="1"
+           android:layout_marginTop="0dp"/>
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

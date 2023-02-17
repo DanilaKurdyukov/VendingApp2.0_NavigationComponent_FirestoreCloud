@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@drawable/drink_item_background">
+        android:background="@drawable/item_background">
 
         <ImageView
             android:layout_width="100dp"
