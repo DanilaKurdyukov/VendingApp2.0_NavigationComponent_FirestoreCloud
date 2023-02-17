@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.vendingapp20.R;
 import com.example.vendingapp20.adapters.VendingMachineDrinkAdapter;
 import com.example.vendingapp20.models.VendingMachineDrink;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,18 +69,33 @@ public class UserFragment extends Fragment {
     private List<VendingMachineDrink> drinks;
     private VendingMachineDrinkAdapter drinkAdapter;
 
+    int totalSum = 0;
+
+    VendingMachineDrink selected;
+
+    MaterialTextView txtTotalSum;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_user, container, false);
+        return inflater.inflate(R.layout.fragment_user, container, false);
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init(view);
+        getDrinks();
+    }
+
+    private void init(View rootView){
         db = FirebaseDatabase.getInstance();
         dbRef = db.getReference("Drinks");
         drinkRecycler = rootView.findViewById(R.id.recycler_view_drinkList);
         drinkRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
         drinks = new ArrayList<>();
         drinkAdapter = new VendingMachineDrinkAdapter(getContext(), drinks);
+        txtTotalSum = rootView.findViewById(R.id.text_view_totalSum);
         drinkAdapter.setOnItemClickListener(new VendingMachineDrinkAdapter.ItemClickListener() {
             @Override
             public void onClick(VendingMachineDrink vendingMachineDrink) {
@@ -87,10 +103,6 @@ public class UserFragment extends Fragment {
             }
         });
         drinkRecycler.setAdapter(drinkAdapter);
-        getDrinks();
-
-
-        return rootView;
     }
 
     private void getDrinks(){

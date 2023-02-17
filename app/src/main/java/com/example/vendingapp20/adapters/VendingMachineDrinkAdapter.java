@@ -46,7 +46,7 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         VendingMachineDrink current = drinks.get(position);
-        holder.txtDrinkCost.setText(String.valueOf(current.getDrinkCost()));
+        holder.txtDrinkCost.setText(String.valueOf(current.getDrinkCost()) + " руб.");
         holder.txtDrinkName.setText(current.getDrinkName());
         if (current.getDrinkImage()!=null){
             Picasso.get().load(current.getDrinkImage()).into(holder.drinkImage);
