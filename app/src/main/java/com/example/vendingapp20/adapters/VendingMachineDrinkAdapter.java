@@ -29,8 +29,6 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
     private List<VendingMachineDrink> drinks;
 
     private SparseBooleanArray selectedItems = new SparseBooleanArray();
-    int position;
-
     public VendingMachineDrinkAdapter(Context mContext, List<VendingMachineDrink> drinks) {
         this.mContext = mContext;
         this.drinks = drinks;

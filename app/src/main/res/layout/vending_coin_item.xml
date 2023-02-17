@@ -16,7 +16,7 @@
        android:background="@drawable/item_background">
 
        <com.google.android.material.textview.MaterialTextView
-           android:id="@+id/text_view_coin_name"
+           android:id="@+id/text_view_coin_value"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            style="@style/TextViewStyle"
