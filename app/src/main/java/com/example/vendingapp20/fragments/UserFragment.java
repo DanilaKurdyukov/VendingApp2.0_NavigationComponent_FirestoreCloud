@@ -25,10 +25,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class UserFragment extends Fragment {
@@ -82,6 +85,8 @@ public class UserFragment extends Fragment {
 
     MaterialTextView txtTotalSum;
 
+    private String drinkId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -109,14 +114,36 @@ public class UserFragment extends Fragment {
                     selected.setCount(selected.getCount()-1);
                     cashBack = totalSum -= selected.getDrinkCost();
                     txtTotalSum.setText(String.valueOf(totalSum) + " рублей");
-/*
-                    new PutDrink().execute();
-*/
+
+                    updateDrink();
+
                     if (selected.getCount()==0){
                         /*vendingMachineDrinks = new ArrayList<>();
                         new GetDrinks().execute();*/
                     }
                 }
+            }
+        });
+    }
+
+    private void updateDrink(){
+        dbRef = db.getReference("Drinks").child("drink"+selected.getId());
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("count",selected.getCount());
+        map.put("drinkCost",selected.getDrinkCost());
+        map.put("drinkName",selected.getDrinkName());
+        map.put("id",selected.getId());
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dbRef.updateChildren(map);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
