@@ -76,7 +76,7 @@ public class UserFragment extends Fragment {
     private List<VendingMachineDrink> drinks;
     private VendingMachineDrinkAdapter drinkAdapter;
 
-    int totalSum = 0;
+    int totalSum = 0, cashBack;
 
     VendingMachineDrink selected;
 
@@ -95,6 +95,7 @@ public class UserFragment extends Fragment {
         getDrinks();
         getCoins();
         drinkItemClick();
+        coinItemClick();
     }
 
     private void drinkItemClick(){
@@ -102,9 +103,30 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(VendingMachineDrink vendingMachineDrink) {
                 selected = vendingMachineDrink;
-                if(totalSum==0){
-                    AppData.showToast(getContext(),"Перед покупкой необходимо внести деньги!");
+                if(selected.getDrinkCost()>totalSum){
+                    AppData.showToast(getContext(), "Цена напитка больше внесенной суммы!");
+                } else{
+                    selected.setCount(selected.getCount()-1);
+                    cashBack = totalSum -= selected.getDrinkCost();
+                    txtTotalSum.setText(String.valueOf(totalSum) + " рублей");
+/*
+                    new PutDrink().execute();
+*/
+                    if (selected.getCount()==0){
+                        /*vendingMachineDrinks = new ArrayList<>();
+                        new GetDrinks().execute();*/
+                    }
                 }
+            }
+        });
+    }
+
+    private void coinItemClick(){
+        coinAdapter.setItemClickListener(new VendingCoinAdapter.ItemClickListener() {
+            @Override
+            public void onClick(VendingMachineCoin vendingMachineCoin) {
+                totalSum += vendingMachineCoin.getCoinValue();
+                txtTotalSum.setText(String.valueOf(totalSum) + " рублей");
             }
         });
     }
@@ -118,12 +140,7 @@ public class UserFragment extends Fragment {
         coinRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
         coins = new ArrayList<>();
         coinAdapter = new VendingCoinAdapter(getContext(),coins);
-        coinAdapter.setItemClickListener(new VendingCoinAdapter.ItemClickListener() {
-            @Override
-            public void onClick(VendingMachineCoin vendingMachineCoin) {
 
-            }
-        });
         coinRecycler.setAdapter(coinAdapter);
 
         drinkRecycler = rootView.findViewById(R.id.recycler_view_drinkList);

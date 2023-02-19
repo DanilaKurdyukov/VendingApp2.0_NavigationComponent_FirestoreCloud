@@ -21,7 +21,7 @@
             android:id="@+id/text_view_totalSum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="50"
+            android:text="0"
             style="@style/TextViewStyle"
             android:background="@drawable/text_view_background"
             android:textStyle="bold"

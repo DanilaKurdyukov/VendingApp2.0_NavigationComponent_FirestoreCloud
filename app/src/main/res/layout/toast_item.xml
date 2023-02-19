@@ -30,7 +30,7 @@
             style="@style/TextViewStyle"
             android:text="asd"
             android:textAlignment="textStart"
-            android:textSize="20dp"/>
+            android:textSize="18dp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
