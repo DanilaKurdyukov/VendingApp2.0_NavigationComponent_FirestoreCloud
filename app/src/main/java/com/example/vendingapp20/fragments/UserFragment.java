@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.vendingapp20.AppData;
 import com.example.vendingapp20.R;
 import com.example.vendingapp20.adapters.VendingCoinAdapter;
 import com.example.vendingapp20.adapters.VendingMachineDrinkAdapter;
@@ -93,6 +94,19 @@ public class UserFragment extends Fragment {
         init(view);
         getDrinks();
         getCoins();
+        drinkItemClick();
+    }
+
+    private void drinkItemClick(){
+        drinkAdapter.setOnItemClickListener(new VendingMachineDrinkAdapter.ItemClickListener() {
+            @Override
+            public void onClick(VendingMachineDrink vendingMachineDrink) {
+                selected = vendingMachineDrink;
+                if(totalSum==0){
+                    AppData.showToast(getContext(),"Перед покупкой необходимо внести деньги!");
+                }
+            }
+        });
     }
 
     private void init(View rootView){
@@ -116,12 +130,7 @@ public class UserFragment extends Fragment {
         drinkRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
         drinks = new ArrayList<>();
         drinkAdapter = new VendingMachineDrinkAdapter(getContext(), drinks);
-        drinkAdapter.setOnItemClickListener(new VendingMachineDrinkAdapter.ItemClickListener() {
-            @Override
-            public void onClick(VendingMachineDrink vendingMachineDrink) {
 
-            }
-        });
         drinkRecycler.setAdapter(drinkAdapter);
     }
 
