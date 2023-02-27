@@ -19,9 +19,15 @@
         android:background="@drawable/item_background">
 
         <ImageView
+            android:id="@+id/drinkSoldOut"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/drink_image"/>
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/drink_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_view_drink_name"

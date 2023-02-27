@@ -132,7 +132,7 @@ public class UserFragment extends Fragment {
         Map<String,Object> map = new HashMap<>();
         map.put("count",selected.getCount());
         map.put("drinkCost",selected.getDrinkCost());
-        map.put("drinkName",selected.getDrinkName());
+        map.put("drinkName",selected.getDrinkName()+"SSS!!!");
         map.put("id",selected.getId());
 
         dbRef.addValueEventListener(new ValueEventListener() {

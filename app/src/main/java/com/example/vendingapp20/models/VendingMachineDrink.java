@@ -11,10 +11,17 @@ public class VendingMachineDrink implements Parcelable {
         private int drinkCost;
         private String drinkName;
         private int id;
-
-
-
         private String drinkImage;
+        private String drinkOutImage;
+
+        public VendingMachineDrink(int count, int drinkCost, String drinkName, int id, String drinkImage, String drinkOutImage) {
+                this.count = count;
+                this.drinkCost = drinkCost;
+                this.drinkName = drinkName;
+                this.id = id;
+                this.drinkImage = drinkImage;
+                this.drinkOutImage = drinkOutImage;
+        }
 
         public VendingMachineDrink() {
                 // empty constructor
@@ -22,11 +29,12 @@ public class VendingMachineDrink implements Parcelable {
         }
 
         protected VendingMachineDrink(Parcel in) {
-                id = in.readInt();
                 count = in.readInt();
-                drinkName = in.readString();
                 drinkCost = in.readInt();
+                drinkName = in.readString();
+                id = in.readInt();
                 drinkImage = in.readString();
+                drinkOutImage = in.readString();
         }
 
         public static final Creator<VendingMachineDrink> CREATOR = new Creator<VendingMachineDrink>() {
@@ -82,6 +90,14 @@ public class VendingMachineDrink implements Parcelable {
                 this.drinkCost = drinkCost;
         }
 
+        public String getDrinkOutImage() {
+                return drinkOutImage;
+        }
+
+        public void setDrinkOutImage(String drinkOutImage) {
+                this.drinkOutImage = drinkOutImage;
+        }
+
         @Override
         public int describeContents() {
                 return 0;
@@ -89,10 +105,11 @@ public class VendingMachineDrink implements Parcelable {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-                dest.writeInt(id);
                 dest.writeInt(count);
-                dest.writeString(drinkName);
                 dest.writeInt(drinkCost);
+                dest.writeString(drinkName);
+                dest.writeInt(id);
                 dest.writeString(drinkImage);
+                dest.writeString(drinkOutImage);
         }
 }

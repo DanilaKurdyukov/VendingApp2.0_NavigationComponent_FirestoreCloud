@@ -45,6 +45,18 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
         VendingMachineDrink current = drinks.get(position);
         holder.txtDrinkCost.setText(String.valueOf(current.getDrinkCost()) + " руб.");
         holder.txtDrinkName.setText(current.getDrinkName());
+        if (current.getCount()<=0){
+            holder.drinkSoldOut.setVisibility(View.VISIBLE);
+            holder.txtDrinkCost.setVisibility(View.GONE);
+            holder.txtDrinkName.setVisibility(View.GONE);
+            holder.drinkImage.setVisibility(View.GONE);
+            Picasso.get().load(current.getDrinkOutImage()).into(holder.drinkSoldOut);
+        }else{
+            holder.drinkSoldOut.setVisibility(View.GONE);
+            holder.txtDrinkCost.setVisibility(View.VISIBLE);
+            holder.txtDrinkName.setVisibility(View.VISIBLE);
+            holder.drinkImage.setVisibility(View.VISIBLE);
+        }
         if (current.getDrinkImage()!=null){
             Picasso.get().load(current.getDrinkImage()).into(holder.drinkImage);
         }
@@ -70,13 +82,14 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
         private MaterialTextView txtDrinkName, txtDrinkCost;
-        private ImageView drinkImage;
+        private ImageView drinkImage,drinkSoldOut;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDrinkName = itemView.findViewById(R.id.text_view_drink_name);
             txtDrinkCost = itemView.findViewById(R.id.text_view_drink_cost);
             drinkImage = itemView.findViewById(R.id.drink_image);
+            drinkSoldOut = itemView.findViewById(R.id.drinkSoldOut);
         }
     }
 }
