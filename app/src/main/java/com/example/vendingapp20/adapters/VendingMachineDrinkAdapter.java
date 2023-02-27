@@ -28,7 +28,6 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
     private Context mContext;
     private List<VendingMachineDrink> drinks;
 
-    private SparseBooleanArray selectedItems = new SparseBooleanArray();
     public VendingMachineDrinkAdapter(Context mContext, List<VendingMachineDrink> drinks) {
         this.mContext = mContext;
         this.drinks = drinks;
@@ -53,16 +52,6 @@ public class VendingMachineDrinkAdapter extends RecyclerView.Adapter<VendingMach
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (selectedItems!=null){
-                        if (selectedItems.get(position,false)){
-                            selectedItems.delete(position);
-                            v.setSelected(false);
-                        }
-                        else{
-                            selectedItems.put(position, true);
-                            v.setSelected(true);
-                        }
-                    }
                     itemClickListener.onClick(current);
                 }
             });

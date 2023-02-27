@@ -22,8 +22,6 @@ public class VendingCoinAdapter extends RecyclerView.Adapter<VendingCoinAdapter.
 
     private List<VendingMachineCoin> coins;
 
-    private SparseBooleanArray selectedItems = new SparseBooleanArray();
-
     private ItemClickListener itemClickListener;
 
     public VendingCoinAdapter(Context mContext, List<VendingMachineCoin> coins) {
@@ -49,16 +47,6 @@ public class VendingCoinAdapter extends RecyclerView.Adapter<VendingCoinAdapter.
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (selectedItems!=null){
-                        if (selectedItems.get(holder.getAdapterPosition(),false)){
-                            selectedItems.delete(holder.getAdapterPosition());
-                            v.setSelected(false);
-                        }
-                        else{
-                            selectedItems.put(holder.getAdapterPosition(),true);
-                            v.setSelected(true);
-                        }
-                    }
                     itemClickListener.onClick(current);
                 }
             });
