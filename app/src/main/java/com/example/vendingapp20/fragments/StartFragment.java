@@ -72,7 +72,7 @@ public class StartFragment extends Fragment {
         view.findViewById(R.id.button_administrativeInterface).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navController.navigate(R.id.authFragment);
             }
         });
     }

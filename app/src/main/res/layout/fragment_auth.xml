@@ -3,8 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AuthFragment">
 
-    
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_layout_adminPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/TextInputLayoutStyle"
+        app:errorEnabled="true"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_adminPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="asdasd"
+            android:hint="Пароль"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_logIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_layout_adminPassword"
+        style="@style/ButtonStyle"
+        android:text="Войти" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

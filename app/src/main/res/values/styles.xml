@@ -19,4 +19,22 @@
         <item name="android:padding">10dp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/text_input_box_stroke_colors</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="hintTextAppearance">@style/TextInputHintStyle</item>
+        <item name="android:textColorHint">@color/darkGreen</item>
+        <item name="hintTextColor">@color/darkGreen</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
+    </style>
+    <style name="TextInputHintStyle">
+        <item name="android:textSize">18dp</item>
+    </style>
 </resources>
