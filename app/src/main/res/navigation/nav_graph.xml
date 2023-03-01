@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_startFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_authFragment"
+            app:destination="@id/authFragment" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.vendingapp20.fragments.UserFragment"
         android:label="Автомат напитков"
         tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.vendingapp20.fragments.AuthFragment"
+        android:label="Авторизация"
+        tools:layout="@layout/fragment_auth" />
 </navigation>
