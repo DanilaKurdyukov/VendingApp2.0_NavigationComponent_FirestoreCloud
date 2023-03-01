@@ -19,6 +19,7 @@ import com.example.vendingapp20.adapters.VendingCoinAdapter;
 import com.example.vendingapp20.adapters.VendingMachineDrinkAdapter;
 import com.example.vendingapp20.models.VendingMachineCoin;
 import com.example.vendingapp20.models.VendingMachineDrink;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -85,7 +86,7 @@ public class UserFragment extends Fragment {
 
     MaterialTextView txtTotalSum;
 
-    private String drinkId;
+    MaterialButton btnCashBack;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,11 +117,6 @@ public class UserFragment extends Fragment {
                     txtTotalSum.setText(String.valueOf(totalSum) + " рублей");
 
                     updateDrink();
-
-                    if (selected.getCount()==0){
-                        /*vendingMachineDrinks = new ArrayList<>();
-                        new GetDrinks().execute();*/
-                    }
                 }
             }
         });
@@ -132,7 +128,7 @@ public class UserFragment extends Fragment {
         Map<String,Object> map = new HashMap<>();
         map.put("count",selected.getCount());
         map.put("drinkCost",selected.getDrinkCost());
-        map.put("drinkName",selected.getDrinkName()+"SSS!!!");
+        map.put("drinkName",selected.getDrinkName());
         map.put("id",selected.getId());
 
         dbRef.addValueEventListener(new ValueEventListener() {
@@ -176,6 +172,16 @@ public class UserFragment extends Fragment {
         drinkAdapter = new VendingMachineDrinkAdapter(getContext(), drinks);
 
         drinkRecycler.setAdapter(drinkAdapter);
+
+        btnCashBack = rootView.findViewById(R.id.button_cash_back);
+        btnCashBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppData.showToast(getContext(),"Сдача: " + cashBack + " рублей.");
+                totalSum = 0;
+                txtTotalSum.setText("");
+            }
+        });
     }
 
     private void getCoins(){
